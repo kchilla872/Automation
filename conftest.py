@@ -65,11 +65,13 @@ def add_date(x=0, format='%m%d%Y'):
     a = str((datetime.now() - timedelta(days=x)).strftime(format))
     return a
 
+
 def random_date():
     start = datetime.now()
     end = start + timedelta(days=30)
     random_date = (start + (end - start) * random.random()).strftime('%Y-%m-%d')
     return random_date
+
 
 def random_word():
     length_of_string = 12
