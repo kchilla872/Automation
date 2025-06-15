@@ -30,9 +30,11 @@ pipeline {
                         echo Virtual environment created
                         call venv\\Scripts\\activate
                         python -m pip install --upgrade pip
+                        echo Pip upgraded
                         pip install -r requirements.txt
+                        echo Requirements installed
                         playwright install
-                        echo Dependencies and Playwright installed
+                        echo Playwright installed
                     """
                 }
             }
