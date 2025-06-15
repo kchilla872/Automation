@@ -8,23 +8,23 @@ pipeline {
     stages {
         stage('Check Python') {
             steps {
-                bat '''
+                bat """
                     @echo off
-                    set "PATH=%PYTHON_PATH%;%PATH%"
+                    set "PATH=${env.PYTHON_PATH};%PATH%"
                     echo Checking Python installation...
                     where python
                     python --version
                     echo Python location confirmed!
-                '''
+                """
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
-                    bat '''
+                    bat """
                         @echo off
-                        set "PATH=%PYTHON_PATH%;%PATH%"
+                        set "PATH=${env.PYTHON_PATH};%PATH%"
                         echo Starting dependency installation...
                         python -m venv venv
                         echo Virtual environment created
@@ -32,8 +32,8 @@ pipeline {
                         python -m pip install --upgrade pip
                         pip install -r requirements.txt
                         playwright install
-                        echo Playwright and dependencies installed
-                    '''
+                        echo Dependencies and Playwright installed
+                    """
                 }
             }
         }
@@ -41,12 +41,12 @@ pipeline {
         stage('Run Tests') {
             steps {
                 timeout(time: 15, unit: 'MINUTES') {
-                    bat '''
+                    bat """
                         @echo off
-                        set "PATH=%PYTHON_PATH%;%PATH%"
+                        set "PATH=${env.PYTHON_PATH};%PATH%"
                         call venv\\Scripts\\activate
                         pytest homePage.py -v --junit-xml=test-results.xml --html=playwright-report\\report.html --self-contained-html
-                    '''
+                    """
                 }
             }
         }
