@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/kchilla872/Automation.git'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 bat 'python -m venv venv'
@@ -17,13 +12,20 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                bat 'call venv\\Scripts\\activate && pytest homePage.py -v'
+                bat 'call venv\\Scripts\\activate && pytest homePage.py -v --junit-xml=test-results.xml'
             }
         }
     }
     post {
         always {
-            junit 'test-results.xml'
+            // Only archive test results if they exist
+            script {
+                if (fileExists('test-results.xml')) {
+                    junit 'test-results.xml'
+                } else {
+                    echo 'No test results found to archive'
+                }
+            }
             cleanWs()
         }
     }
