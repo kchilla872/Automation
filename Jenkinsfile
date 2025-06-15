@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/kchilla872/Playwright.git'
+                git 'https://github.com/kchilla872/Automation.git'
             }
         }
         stage('Install Dependencies') {
