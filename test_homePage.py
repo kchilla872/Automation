@@ -56,8 +56,9 @@ def test_TC007_Save_for_later_CartItems(page):
 
 
 @pytest.mark.order(8)
-def test_TC008_Move_for_later(page):
-    page.wait_for_selector(HomePage.Moveforlater).click()
+def test_TC008_Move_to_cart\
+                (page):
+    page.wait_for_selector(HomePage.Movetocart).click()
     page.wait_for_timeout(1000)
 
 

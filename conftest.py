@@ -78,5 +78,6 @@ def random_word():
     s = "".join(random.choice(string.ascii_letters) for i in range(length_of_string))
     return s
 
+
 def random_number(f=2):
     return str(random.randint(10, 100)) + ".11"
