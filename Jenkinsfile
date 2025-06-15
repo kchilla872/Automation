@@ -6,15 +6,18 @@ pipeline {
     }
 
     stages {
-        stage('Check Python') {
+        stage('Debug Python Setup') {
             steps {
                 bat """
                     @echo off
                     set "PATH=${env.PYTHON_PATH};%PATH%"
-                    echo Checking Python installation...
+                    echo ===== PATH Check =====
+                    echo %PATH%
+                    echo ===== where python =====
                     where python
+                    echo ===== python version =====
                     python --version
-                    echo Python location confirmed!
+                    echo ===== finished checking python =====
                 """
             }
         }
@@ -30,11 +33,9 @@ pipeline {
                         echo Virtual environment created
                         call venv\\Scripts\\activate
                         python -m pip install --upgrade pip
-                        echo Pip upgraded
                         pip install -r requirements.txt
-                        echo Requirements installed
                         playwright install
-                        echo Playwright installed
+                        echo All dependencies installed
                     """
                 }
             }
