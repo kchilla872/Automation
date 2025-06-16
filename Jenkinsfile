@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         PYTHON_EXE = 'C:\\Program Files\\Python313\\python.exe'
-        PIP_EXE = 'C:\\Program Files\\Python313\\Scripts\\pip.exe'
+        PIP_EXE = 'C:\\Users\\karthik.chillara\\AppData\\Roaming\\Python\\Python313\\Scripts\\pip.exe'
     }
 
     stages {
@@ -16,21 +16,13 @@ pipeline {
                         echo Current user: %USERNAME%
                         echo Current directory: %CD%
 
-                        echo ===== Checking Python Path =====
-                        where python
-                        dir "C:\\Program Files\\Python313"
-
-                        echo ===== Checking Pip Path =====
-                        where pip
-                        dir "C:\\Program Files\\Python313\\Scripts"
-
                         echo ===== Testing Python =====
-                        call "%PYTHON_EXE%" --version || echo Python check failed
+                        call "%PYTHON_EXE%" --version
 
-                        echo ===== Testing Pip =====
-                        call "%PIP_EXE%" --version || echo Pip check failed
+                        echo ===== Testing Pip (User Path) =====
+                        call "%PIP_EXE%" --version
 
-                        echo ===== Test completed successfully =====
+                        echo ===== End =====
                     """
                 }
             }
