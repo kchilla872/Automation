@@ -11,6 +11,7 @@ class HomePage:
     Firstresult = "(//h2[contains(@class, 'a-size-medium') and contains(@class, 'a-text-normal')]//span)[1]"
     Addtocart = "//span[@id='submit.add-to-cart']"
     Gotocart = "//span[@id='nav-cart-count']"
+    PopupCloseButton = "//a[@aria-label='Exit this panel and return to the product page.']"
     Viewcart = "//div[@id='nav-cart-count-container']"
     Cartitemradiobutton = "//input[@type='checkbox']/ancestor::div[@class='a-checkbox a-checkbox-fancy sc-item-check-checkbox-selector sc-list-item-checkbox']"
     Saveforlater = "//input[@value='Save for later']"

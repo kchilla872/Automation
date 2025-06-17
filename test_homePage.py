@@ -26,6 +26,12 @@ def test_TC003_AddtoCart(page):
     page.wait_for_selector(HomePage.Firstresult).click()
     page.wait_for_selector(HomePage.Addtocart).click()
     page.wait_for_timeout(4000)
+    try:
+        page.wait_for_selector(HomePage.PopupCloseButton, state="visible", timeout=5000)
+        page.click(HomePage.PopupCloseButton)
+    except:
+        pass
+    page.wait_for_timeout(4000)
 
 
 @pytest.mark.order(4)
@@ -55,8 +61,7 @@ def test_TC007_Save_for_later_CartItems(page):
 
 
 @pytest.mark.order(8)
-def test_TC008_Move_to_cart\
-                (page):
+def test_TC008_Move_to_cart(page):
     page.wait_for_selector(HomePage.Movetocart).click()
     page.wait_for_timeout(1000)
 
