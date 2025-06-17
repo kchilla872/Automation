@@ -30,7 +30,6 @@ def test_TC003_AddtoCart(page):
 
 @pytest.mark.order(4)
 def test_TC004_GotoCart(page):
-    page.wait_for_selector(HomePage.Firstresult).click()
     page.wait_for_selector(HomePage.Gotocart).click()
     page.wait_for_timeout(3000)
 
