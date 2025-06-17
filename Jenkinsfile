@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        PYTHON_PATH = 'C:\\Program Files\\Python313'
-        PYTHON_EXE = 'C:\\Program Files\\Python313\\python.exe'
-        PIP_EXE = 'C:\\Program Files\\Python313\\Scripts\\pip.exe'
+        PYTHON_PATH = '"C:\\Program Files\\Python313"'
+        PYTHON_EXE = '"C:\\Program Files\\Python313\\python.exe"'
+        PIP_EXE = '"C:\\Program Files\\Python313\\Scripts\\pip.exe"'
     }
 
     stages {
@@ -18,16 +18,16 @@ pipeline {
                         echo ===== Environment Setup =====
 
                         echo ===== Verifying Python Installation =====
-                        if not exist "%PYTHON_EXE%" (
+                        if not exist %PYTHON_EXE% (
                             echo ERROR: Python executable not found at %PYTHON_EXE%
                             exit /b 1
                         )
                         echo Python found, checking version...
-                        "%PYTHON_EXE%" --version
+                        %PYTHON_EXE% --version
 
                         echo ===== Setting up Virtual Environment =====
-                        if exist "venv\" rmdir /s /q venv
-                        "%PYTHON_EXE%" -m venv venv
+                        if exist "venv\\" rmdir /s /q venv
+                        %PYTHON_EXE% -m venv venv
                         if %ERRORLEVEL% neq 0 (
                             echo ERROR: Failed to create virtual environment
                             exit /b 1
@@ -118,7 +118,7 @@ pipeline {
                             echo "No HTML report found"
                         }
 
-                        // Archive any screenshots or videos
+                        // Archive screenshots or videos if present
                         if (fileExists('test-results/')) {
                             echo "Archiving test artifacts"
                             archiveArtifacts artifacts: 'test-results/**/*', allowEmptyArchive: true
