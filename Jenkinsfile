@@ -5,26 +5,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Python environment and installing dependencies...'
-                timeout(time: 8, unit: 'MINUTES') {
-                    bat '''
-                        cd "C:\\Users\\karthik.chillara\\PycharmProjects\\Amazondemo0616"
-                        cmd /c "call venv\\Scripts\\activate.bat && pip install -r requirements.txt && playwright install chromium --with-deps"
-                        echo Build completed successfully
-                    '''
-                }
+                bat '''
+                    cd "C:\\Users\\karthik.chillara\\PycharmProjects\\Amazondemo0616"
+                    cmd /c "call venv\\Scripts\\activate.bat && pip install -r requirements.txt && playwright install chromium --with-deps"
+                    echo Build completed successfully
+                '''
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running Playwright tests...'
-                timeout(time: 10, unit: 'MINUTES') {
-                    bat '''
-                        cd "C:\\Users\\karthik.chillara\\PycharmProjects\\Amazondemo0616"
-                        cmd /c "call venv\\Scripts\\activate.bat && pytest test_homePage.py -v --html=report.html --self-contained-html"
-                        echo Tests completed
-                    '''
-                }
+                bat '''
+                    cd "C:\\Users\\karthik.chillara\\PycharmProjects\\Amazondemo0616"
+                    cmd /c "call venv\\Scripts\\activate.bat && pytest test_homePage.py -v --html=report.html --self-contained-html"
+                    echo Tests completed
+                '''
             }
         }
 
